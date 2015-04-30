@@ -7,6 +7,7 @@ def ClearScreen():
     os.system('reset')
 
 def MainMenu():
+    ClearScreen()
     print "1. Add an item" #Prints this in Main Menu
     print "2. Sell Articles" #Prints this in Main Menu
     print "3. Exit" #Prints this in Main Menu
@@ -14,85 +15,77 @@ def MainMenu():
 def Option1():
     product = raw_input("Enter a product: ")
     price = int(raw_input("Enter a price: "))
-    Option2(product,price)
-    #ClearScreen()
-
-def Option2(product,price):
     my_products[product] = price
     print my_products
-    #ClearScreen()
 
-def Option3():
-    OPTION = False
-    #pass #Leaves the program
-    #ClearScreen()
-
-def OptionY(product):
-    #if product == "y":
-    while product == "y":
+def OptionY(add):
+    #if add == "y":
+    while add == "y":
         Option1()
-        product = raw_input("Do you want to add another item?: ")
-        product = product.lower()
-        if product == "n":
-            MainMenu()
-    OptionDone(product)
-    #ClearScreen()
+        add = raw_input("Do you want to add another item?: ")
+        add = add.lower()
+        if add == "n":
+            OptionN()
 
-def OptionN(product):
-    #if product == "n":
+def OptionN():
     MainMenu()
-    #ClearScreen()
 
-def OptionDifferent(product):
-    #if product != "y" or product != "n" or product != "done":
+def OptionDifferent():
     print "PLEASE ENTER \"y\" OR \"n\" OR \"done\""
-    #ClearScreen()
 
-def OptionDone(product):
-    #if product == "done":
+def OptionDone(done):
     total = 0
-    for elements in my_products:
-        total += my_products[elements]
+    if buy in my_products:
+        total += my_products[buy]
     print "Gracias por su compra, su total es: ", total
-    ok = raw_input("PRESS ANY BUTTON")
+    ok = raw_input("PRESS ENTER")
+    ClearScreen()
     MainMenu()
-    #ClearScreen()
 
-def OptionsProducts(product):
-    if product == "y":
-        OptionY(product)
-    elif product == "n":
-        OptionN(product)
-    elif product != "y" or product != "n" or product != "done":
-        OptionDifferent(product)
-    elif product == "done":
-        OptionDone(product)
-    #ClearScreen()
+def OptionAdd(add):
+    if add == "y":
+        OptionY(add)
+    elif add == "n":
+        OptionN()
+    elif add != "y" or add != "n":
+        OptionDifferent()
 
-MainMenu()
-
-OPTION = True #Declares a variable option
+OPTION_NUMBER = True #Declares a variable option
 my_products = {}
 
-while OPTION == True: #Starts a cycle "while" option be zero
+while OPTION_NUMBER == True and OPTION_NUMBER != False: #Starts a cycle "while" option be zero
+    print OPTION_NUMBER
     try: #Starts a Try
-        #Asks to enter a number to choose
+        MainMenu()
         OPTION = int(raw_input("Select the number of the action you want to perform: "))
         ClearScreen()
-        if OPTION == 3: #If the input is equals to 3 makes the next code
-            #OPTION = False
-            Option3()
-        elif OPTION == 1:
-            Option1()
+        if OPTION == 1:
             try:
-                product = raw_input("Do you want to add another item?: ")
-                product = product.lower()
-                OptionsProducts(product)
-                OPTION = True #If the exception is true makes option equals to zero
-            except:
+                Option1()
+                add = raw_input("Do you want to add another item?: ")
+                add = add.lower()
+                OptionAdd(add)
+            except ValueError:
                 print "ENTER TEXT"
         elif OPTION == 2:
-            OptionDone(product)
-            #OPTION = True #If the exception is true makes option equals to zero
+            buy = raw_input("Which product you want to buy?: ")
+            if buy != "done":
+                print my_products[buy], buy
+            total = 0
+            while buy != "done":
+                if buy in my_products:
+                    total += my_products[buy]
+                    buy = raw_input("Other product you want to buy? Or write \"done\": ")
+                    if buy != "done":
+                        print my_products[buy], buy
+                    if buy == "done":
+                        print "Gracias por su compra, su total es: ", total
+                        ok = raw_input("PRESS ENTER")
+                        ClearScreen()
+                        MainMenu()
+            if buy == "done":
+                print "First write the product that you want to buy"
+        elif OPTION == 3: #If the input is equals to 3 makes the next code
+            OPTION_NUMBER = False
     except ValueError: #Makes an exception and name the exception
         print "ENTER A NUMBER BETWEEN 1 AND 3 TO CHOOSE" #Prints an instruction
