@@ -7,6 +7,8 @@ def clearscreen():
     """Creates a function for clean the screen"""
     os.system('reset')
 
+#--------------------------OPCION 1--------------------------
+
 def option1():
     """The option number 1 of the Main Menu"""
     product = raw_input("Enter a product: ") #This is the item entered
@@ -30,6 +32,16 @@ def option1():
     LIST_PRODUCT.append(product) #Adds the product to a list called "LIST_PRODUCT"
     MY_PRODUCTS[product] = price #
     print ""
+
+def option_add(add):
+    """Starst a function to take a decision if we want to enter another item"""
+    if add == "y": #If we enter y calls the function option_y
+        option_y(add)
+    elif add == "n": #If we enter n calls the function option_y
+        option_n()
+    #If we enter something different of y or n calls the function option_y
+    elif add != "y" or add != "n":
+        option_different()
 
 def option_y(add):
     """Creates a function for if we want to add another item"""
@@ -66,44 +78,7 @@ def option_different():
     """Starst a function if we do not enter y or n"""
     print "PLEASE ENTER \"y\" OR \"n\""
 
-def option_add(add):
-    """Starst a function to take a decision if we want to enter another item"""
-    if add == "y": #If we enter y calls the function option_y
-        option_y(add)
-    elif add == "n": #If we enter n calls the function option_y
-        option_n()
-    #If we enter something different of y or n calls the function option_y
-    elif add != "y" or add != "n":
-        option_different()
-
-def num_times(my_buy, list_product):
-    """Starts a function for print the quantity of products we asked"""
-    print "PRODUCTS PURCHASED"
-    for each_product in list_product: #This is for to have every item of LIST_PRODUCT
-        num_times_products_on_sale = my_buy.count(each_product)
-        if num_times_products_on_sale >= 1:
-            print num_times_products_on_sale, each_product, "a", ("%.2f" % MY_PRODUCTS[each_product])
-
-def print_bill(my_buy, list_product, total, tax, subtotal, discount, final_total):
-    """Makes the bill"""
-    print ""
-    num_times(my_buy, list_product)
-    print ""
-    print "The Total price of the products:", ("%.2f" % total)
-    print "The Tax is:", ("%.2f" % tax)
-    print "The subtotal is:", ("%.2f" % subtotal)
-    print "The discount is:", ("%.2f" % discount)
-    print "The Total Final is:", ("%.2f" % final_total)
-    print "Thank you for shopping with us"
-    enter = raw_input("PRESS ENTER")
-    if enter == "":
-        clearscreen()
-        main_menu()
-    while enter != "":
-        enter = raw_input("PRESS ENTER")
-        if enter == "":
-            clearscreen()
-            main_menu()
+#--------------------------OPCION 2--------------------------
 
 def my_total(buy, my_option, my_buy, my_products, total):
     """It is a function for make the calculates"""
@@ -162,6 +137,37 @@ def my_total(buy, my_option, my_buy, my_products, total):
 
         elif buy not in my_products and buy != "done" and buy != "gold" and buy != "silver":
             print "  ", "This is not registered"
+
+def print_bill(my_buy, list_product, total, tax, subtotal, discount, final_total):
+    """Makes the bill"""
+    print ""
+    num_times(my_buy, list_product)
+    print ""
+    print "The Total price of the products:", ("%.2f" % total)
+    print "The Tax is:", ("%.2f" % tax)
+    print "The subtotal is:", ("%.2f" % subtotal)
+    print "The discount is:", ("%.2f" % discount)
+    print "The Total Final is:", ("%.2f" % final_total)
+    print "Thank you for shopping with us"
+    enter = raw_input("PRESS ENTER")
+    if enter == "":
+        clearscreen()
+        main_menu()
+    while enter != "":
+        enter = raw_input("PRESS ENTER")
+        if enter == "":
+            clearscreen()
+            main_menu()
+
+def num_times(my_buy, list_product):
+    """Starts a function for print the quantity of products we asked"""
+    print "PRODUCTS PURCHASED"
+    for each_product in list_product: #This is for to have every item of LIST_PRODUCT
+        num_times_products_on_sale = my_buy.count(each_product)
+        if num_times_products_on_sale >= 1:
+            print num_times_products_on_sale, each_product, "a", ("%.2f" % MY_PRODUCTS[each_product])
+
+#-------------------------MEIN MENU-------------------------
 
 def main_menu():
     """Prints the Manin Menu"""
