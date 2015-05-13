@@ -14,7 +14,7 @@ def clearscreen():
     """Creates a function for clean the screen"""
     os.system('reset')
 
-'''-------------------------OPCION 1-------------------------'''
+#-------------------------OPCION 1-------------------------
 def option1():
     """The option number 1 of the Main Menu"""
     clearscreen()
@@ -71,7 +71,7 @@ def option_different():
     """Starst a function if we do not enter y or n"""
     print "PLEASE ENTER \"y\" OR \"n\""
 
-'''-------------------------OPCION 2-------------------------'''
+#-------------------------OPCION 2-------------------------
 
 def option2():
     """Makes the process of option 2"""
@@ -172,7 +172,7 @@ def num_times():
         if num_products_on_sale >= 1:
             print num_products_on_sale, each_product, "a", ("%.2f" % MY_PRODUCTS[each_product])
 
-'''------------------------MAIN MENU------------------------'''
+#------------------------MAIN MENU------------------------
 
 def main_menu():
     """Prints the Manin Menu"""
