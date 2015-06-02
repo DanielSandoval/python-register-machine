@@ -7,7 +7,7 @@ import sys
 MY_PRODUCTS = {} #This is a dictionary to have all product we have on sale
 EXISTENCE_PRODUCT = [] #This a list to have the products we have sold
 PRODUCTS_SOLD = [] #We make a list to save the products we want
-MY_OPTION = [] #It is a list to save the option gold/siver/done
+MY_DISCOUNT = [] #It is a list to save the option gold/siver/done
 
 
 def clearscreen():
@@ -24,44 +24,62 @@ def option_n():
     """Starts a function to go to the Main Menu"""
     main_menu()
 
-def question_add():
+def question_add(add = ""):
     """It asks if we want to add another item"""
-    add = raw_input("Do you want to add another item?: ")
+    if __name__ == '__main__':
+        add = raw_input("Do you want to add another item?: ")
     add = add.lower()
     return add
 
+def select_option(product):
+    if product.isdigit():
+        print "PLEASE WRITE TEXT!!!\n"
+        return True
+    elif product.isalpha():
+        return False
+    elif product.isalnum():
+        print "PLEASE WRITE TEXT!!!\n"
+        return True
+
+def the_product(product = ""):
+    if __name__ == '__main__':
+        my_input = True
+        while my_input == True:
+            product = raw_input("Enter a product: ") #This is the item entered
+            product = product.lower()
+            my_input = select_option(product)
+    return product
+
+#def the_price(price = 0):
+def the_price(product,price = 0):
+    if __name__ == '__main__':
+        my_input = True
+        while my_input == True:
+            try:
+                price = raw_input("Enter a price: ") #Ask the price of the product
+                price = float(price)
+                my_input = False
+            except ValueError:
+                #print """PLEASE WRITE NUMBERS!!!\n"""
+                print """PLEASE WRITE NUMBERS!!!\n\nProducto:""", product
+    return price
+
 def enter_product():
     """This function asks a product and a price"""
-
-    my_input = True
-    while my_input == True:
-        product = raw_input("Enter a product: ") #This is the item entered
-        product = product.lower()
-        if product.isdigit():
-            print "PLEASE WRITE TEXT!!!\n"
-        elif product.isalpha():
-            my_input = False
-        elif product.isalnum():
-            print "PLEASE WRITE TEXT!!!\n"
-
-    while True:
-        try:
-            price = raw_input("Enter a price: ") #Ask the price of the product
-            price = float(price)
-            break
-        except ValueError:
-            print """PLEASE WRITE NUMBERS!!!\n\nProducto:""", product
+    product = the_product()
+    #price = the_price()
+    price = the_price(product)
 
     EXISTENCE_PRODUCT.append(product) #Adds the product to a list called "EXISTENCE_PRODUCT"
     MY_PRODUCTS[product] = price
-    print "Product added correctly\n"
+    print "Product added correctly"
 
 def option1():
     """The option number 1 of the Main Menu"""
     clearscreen()
     enter_product()
     add = question_add()
-    my_input = True
+    my_input = True #It is only to help to the cycle
     while my_input == True:
         if add == "y":
             print ""
@@ -86,46 +104,66 @@ def num_times():
 
 def print_bill(total, tax, discount, subtotal, final_total):
     """Makes the bill"""
-    print ""
-    num_times()
-    print ""
-    print "The Total price of the products:", ("%.2f" % total)
-    print "The Tax is:", ("%.2f" % tax)
-    print "The subtotal is:", ("%.2f" % subtotal)
-    print "The discount is:", ("%.2f" % discount)
-    print "The Final Total is:", ("%.2f" % final_total)
-    print "Thank you for shopping with us"
-    enter = raw_input("PRESS ENTER")
-    while enter != "":
-        enter = raw_input("PRESS ENTER")
-        if enter == "":
-            pass
+    if __name__ == '__main__':
+        print ""
+        num_times()
+        print ""
+        print "The Total price of the products:", ("%.2f" % total)
+        print "The Tax is:", ("%.2f" % tax)
+        print "The subtotal is:", ("%.2f" % subtotal)
+        print "The discount is:", ("%.2f" % discount)
+        print "The Final Total is:", ("%.2f" % final_total)
+        print "Thank you for shopping with us"
 
-def my_total(total):
-    """It is a function for make the calculates"""
-    discount = 0
-    subtotal = 0
-    tax = total * 0.12
+        enter = raw_input("PRESS ENTER")
+        while enter != "":
+            enter = raw_input("PRESS ENTER")
+            if enter == "":
+                pass
+
+    return final_total
+
+def silver_card(subtotal):
+    discount = subtotal * 0.02
+    return discount
+
+def gold_card(subtotal):
+    discount = subtotal * 0.05
+    return discount
+
+def mySubtotal(total,tax):
     subtotal = total + tax
+    return subtotal
+
+def myFinalTotal(subtotal,discount):
     final_total = subtotal - discount
+    return final_total
+
+def my_total(total,subtotal = 0,discount = 0):
+    """It is a function for make the calculates"""
+    tax = total * 0.12
+    subtotal = mySubtotal(total,tax)
+    final_total = 0
 
     #If we have only silver card
-    if "silver" in MY_OPTION and "gold" not in MY_OPTION:
-        discount = final_total * 0.02
-        subtotal = total + tax
-        final_total -= discount
+    if "silver" in MY_DISCOUNT and "gold" not in MY_DISCOUNT:
+        discount = silver_card(subtotal)
+        final_total = myFinalTotal(subtotal,discount)
 
     #If we have gold card
-    elif "gold" in MY_OPTION:
-        discount = final_total * 0.05
-        subtotal = total + tax
-        final_total -= discount
+    elif "gold" in MY_DISCOUNT:
+        discount = gold_card(subtotal)
+        final_total = myFinalTotal(subtotal,discount)
+
+    else:
+        final_total = myFinalTotal(subtotal,discount)
 
     print_bill(total, tax, discount, subtotal, final_total)
 
-def buy_product():
+def buy_product(buy = ""):
     """It asks the product that we want to buy"""
-    buy = raw_input("Enter the product you want to buy: ")
+    if __name__ == '__main__':
+        buy = raw_input("Enter the product you want to buy: ")
     buy = buy.lower()
     PRODUCTS_SOLD.append(buy)
     return buy
@@ -133,25 +171,29 @@ def buy_product():
 def option2():
     """Makes the process of option 2"""
     clearscreen()
+
     total = 0
     while True:
         buy = buy_product()
+
         if buy in MY_PRODUCTS:
+            #If buy is in MY_PRODUCTS
             print "  ", buy, ("%.2f" % MY_PRODUCTS[buy])
             total += MY_PRODUCTS[buy]
         elif buy not in MY_PRODUCTS and buy != "done" and buy != "gold" and buy != "silver":
+            #If buy is not in MY_PRODUCTS
             PRODUCTS_SOLD.remove(buy)
             print "  ", "This is not registered"
 
         if buy == "gold" or buy == "silver":
-            MY_OPTION.append(buy)
+            MY_DISCOUNT.append(buy)
             PRODUCTS_SOLD.remove(buy)
 
         if buy == "done":
             PRODUCTS_SOLD.remove(buy)
             my_total(total)
 
-            del MY_OPTION[:]
+            del MY_DISCOUNT[:]
             del PRODUCTS_SOLD[:]
 
             break
@@ -159,33 +201,42 @@ def option2():
 
 #------------------------MAIN MENU------------------------
 
-def main_menu():
-    """Prints the Manin Menu"""
-    while True:
+def my_option(option):
+    if option == 1:
+        option1()
+    elif option == 2:
+        option2()
+    elif option == 3:
         clearscreen()
-        print "1. Add an item" #Prints this in Main Menu
-        print "2. Sell Articles" #Prints this in Main Menu
-        print "3. Exit" #Prints this in Main Menu
+        sys.exit()
+    elif option < 1 or option > 3:
+        print "\nINSERT A VALID OPTION!!!"
+        enter = raw_input("PRESS ENTER")
+        while enter != "":
+            enter = raw_input("PRESS ENTER")
 
-        option = raw_input("Select the number of the action you want to perform: ")
-        try:
-            option = int(option)
-            if option == 1:
-                option1()
-            elif option == 2:
-                option2()
-            elif option == 3:
-                clearscreen()
-                sys.exit()
-            elif option < 1 or option > 3:
-                print "\nINSERT A VALID OPTION!!!"
+def main_menu(option = 0):
+    """Prints the Manin Menu"""
+    if __name__ == '__main__':
+
+        while True:
+            clearscreen()
+            print "1. Add an item" #Prints this in Main Menu
+            print "2. Sell Articles" #Prints this in Main Menu
+            print "3. Exit" #Prints this in Main Menu
+
+            option = raw_input("Select the number of the action you want to perform: ")
+
+            try:
+                option = int(option)
+                my_option(option)
+
+            except ValueError:
+                print "\nINSERT ONLY NUMBERS!!!"
                 enter = raw_input("PRESS ENTER")
                 while enter != "":
                     enter = raw_input("PRESS ENTER")
-        except ValueError:
-            print "\nINSERT ONLY NUMBERS!!!"
-            enter = raw_input("PRESS ENTER")
-            while enter != "":
-                enter = raw_input("PRESS ENTER")
+    return option
 
-main_menu()
+if __name__ == '__main__':
+    main_menu()
