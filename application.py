@@ -215,6 +215,22 @@ def my_option(option):
         while enter != "":
             enter = raw_input("PRESS ENTER")
 
+def myTry(option):
+    try:
+        palabra = "NUMBERS"
+        option = int(option)
+        if __name__ == '__main__':
+            my_option(option)
+
+    except ValueError:
+        palabra = "INSERT ONLY NUMBERS!!!"
+        if __name__ == '__main__':
+            print "\n" + palabra
+            enter = raw_input("PRESS ENTER")
+            while enter != "":
+                enter = raw_input("PRESS ENTER")
+    return palabra
+
 def main_menu(option = 0):
     """Prints the Manin Menu"""
     if __name__ == '__main__':
@@ -226,16 +242,8 @@ def main_menu(option = 0):
             print "3. Exit" #Prints this in Main Menu
 
             option = raw_input("Select the number of the action you want to perform: ")
+            myTry(option)
 
-            try:
-                option = int(option)
-                my_option(option)
-
-            except ValueError:
-                print "\nINSERT ONLY NUMBERS!!!"
-                enter = raw_input("PRESS ENTER")
-                while enter != "":
-                    enter = raw_input("PRESS ENTER")
     return option
 
 if __name__ == '__main__':
