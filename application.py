@@ -67,7 +67,6 @@ def the_price(product,price = 0):
 def enter_product():
     """This function asks a product and a price"""
     product = the_product()
-    #price = the_price()
     price = the_price(product)
 
     EXISTENCE_PRODUCT.append(product) #Adds the product to a list called "EXISTENCE_PRODUCT"
@@ -201,6 +200,17 @@ def option2():
 
 #------------------------MAIN MENU------------------------
 
+def less_or_greater(option):
+    message = "VALID OPTION!!!"
+    if (option < 1 or option > 3) and type(option) == int:
+        message = "INSERT A VALID OPTION!!!"
+        if __name__ == "__main__":
+            print "\n" + message
+            enter = raw_input("PRESS ENTER")
+            while enter != "":
+                enter = raw_input("PRESS ENTER")
+    return message
+
 def my_option(option):
     if option == 1:
         option1()
@@ -209,27 +219,23 @@ def my_option(option):
     elif option == 3:
         clearscreen()
         sys.exit()
-    elif option < 1 or option > 3:
-        print "\nINSERT A VALID OPTION!!!"
-        enter = raw_input("PRESS ENTER")
-        while enter != "":
-            enter = raw_input("PRESS ENTER")
+    else:
+        less_or_greater(option)
 
 def myTry(option):
     try:
-        palabra = "NUMBERS"
+        word = "NUMBERS"
         option = int(option)
-        if __name__ == '__main__':
-            my_option(option)
+        return option
 
     except ValueError:
-        palabra = "INSERT ONLY NUMBERS!!!"
+        word = "INSERT ONLY NUMBERS!!!"
         if __name__ == '__main__':
-            print "\n" + palabra
+            print "\n" + word
             enter = raw_input("PRESS ENTER")
             while enter != "":
                 enter = raw_input("PRESS ENTER")
-    return palabra
+    return word
 
 def main_menu(option = 0):
     """Prints the Manin Menu"""
@@ -242,7 +248,8 @@ def main_menu(option = 0):
             print "3. Exit" #Prints this in Main Menu
 
             option = raw_input("Select the number of the action you want to perform: ")
-            myTry(option)
+            option = myTry(option)
+            my_option(option)
 
     return option
 
