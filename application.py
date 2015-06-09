@@ -18,12 +18,13 @@ def clearscreen():
 
 def option_different():
     """Starst a function if we do not enter y or n"""
-    print "PLEASE ENTER \"y\" OR \"n\""
+    print "PLEASE ENTER Y OR N"
 
 def option_n():
     """Starts a function to go to the Main Menu"""
     main_menu()
 
+#Function 1: test_question_add
 def question_add(add = ""):
     """It asks if we want to add another item"""
     if __name__ == '__main__':
@@ -31,26 +32,30 @@ def question_add(add = ""):
     add = add.lower()
     return add
 
+#Function 2: test_select_option
 def select_option(product):
-    if product.isdigit():
-        print "PLEASE WRITE TEXT!!!\n"
-        return True
-    elif product.isalpha():
+    if type(product) == int:
+        if __name__ == "__main__":
+            print "PLEASE WRITE TEXT!!!\n"
         return False
-    elif product.isalnum():
-        print "PLEASE WRITE TEXT!!!\n"
+    elif product.isalpha():
         return True
+    elif product.isalnum():
+        if __name__ == "__main__":
+            print "PLEASE WRITE TEXT!!!\n"
+        return False
 
+#Function 3: test_the_product
 def the_product(product = ""):
     if __name__ == '__main__':
-        my_input = True
-        while my_input == True:
+        my_input = False
+        while my_input == False:
             product = raw_input("Enter a product: ") #This is the item entered
             product = product.lower()
             my_input = select_option(product)
     return product
 
-#def the_price(price = 0):
+#Function 4: test_the_price
 def the_price(product,price = 0):
     if __name__ == '__main__':
         my_input = True
@@ -88,6 +93,7 @@ def option1():
             my_input = False
             option_n()
         elif add != "y" or add != "n":
+            print ""
             option_different()
             add = question_add()
 
@@ -122,18 +128,22 @@ def print_bill(total, tax, discount, subtotal, final_total):
 
     return final_total
 
+#Function 5: test_silver_card
 def silver_card(subtotal):
     discount = subtotal * 0.02
     return discount
 
+#Function 6: test_gold_card
 def gold_card(subtotal):
     discount = subtotal * 0.05
     return discount
 
+#Function 7: test_mySubtotal
 def mySubtotal(total,tax):
     subtotal = total + tax
     return subtotal
 
+#Function 8: test_myFinalTotal
 def myFinalTotal(subtotal,discount):
     final_total = subtotal - discount
     return final_total
@@ -159,6 +169,7 @@ def my_total(total,subtotal = 0,discount = 0):
 
     print_bill(total, tax, discount, subtotal, final_total)
 
+#Function 9: test_buy_product
 def buy_product(buy = ""):
     """It asks the product that we want to buy"""
     if __name__ == '__main__':
@@ -200,6 +211,7 @@ def option2():
 
 #------------------------MAIN MENU------------------------
 
+#Function 10: test_less_or_greater
 def less_or_greater(option):
     message = "VALID OPTION!!!"
     if (option < 1 or option > 3) and type(option) == int:
@@ -222,6 +234,7 @@ def my_option(option):
     else:
         less_or_greater(option)
 
+#Function 11: test_myTry
 def myTry(option):
     try:
         word = "NUMBERS"
@@ -237,6 +250,7 @@ def myTry(option):
                 enter = raw_input("PRESS ENTER")
     return word
 
+#Function 12: test_main_menu
 def main_menu(option = 0):
     """Prints the Manin Menu"""
     if __name__ == '__main__':
