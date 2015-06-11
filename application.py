@@ -34,16 +34,25 @@ def question_add(add = ""):
 
 #Function 2: test_select_option
 def select_option(product):
-    if type(product) == int:
-        if __name__ == "__main__":
-            print "PLEASE WRITE TEXT!!!\n"
-        return False
-    elif product.isalpha():
-        return True
-    elif product.isalnum():
-        if __name__ == "__main__":
-            print "PLEASE WRITE TEXT!!!\n"
-        return False
+    try:
+        if product.isalpha() == True:
+            return True
+        else:
+            return False
+    except ValueError:
+        #return False
+        pass
+
+    '''if type(product) == int:
+        if (0 in product) or (1 in product) or (2 in product) or (3 in product) or (4 in product) or (5 in product) or (6 in product) or (7 in product) or (8 in product) or (9 in product):
+            return False
+        else:
+            return True
+    else:
+        if ("0" in product) or ("1" in product) or ("2" in product) or ("3" in product) or ("4" in product) or ("5" in product) or ("6" in product) or ("7" in product) or ("8" in product) or ("9" in product):
+            return False
+        else:
+            return True'''
 
 #Function 3: test_the_product
 def the_product(product = ""):
@@ -53,6 +62,8 @@ def the_product(product = ""):
             product = raw_input("Enter a product: ") #This is the item entered
             product = product.lower()
             my_input = select_option(product)
+            if my_input == False:
+                print "PLEASE WRITE TEXT!!!\n"
     return product
 
 #Function 4: test_the_price
@@ -65,7 +76,6 @@ def the_price(product,price = 0):
                 price = float(price)
                 my_input = False
             except ValueError:
-                #print """PLEASE WRITE NUMBERS!!!\n"""
                 print """PLEASE WRITE NUMBERS!!!\n\nProducto:""", product
     return price
 

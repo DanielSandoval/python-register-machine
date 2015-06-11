@@ -7,8 +7,8 @@ class TestRegisterMachine(unittest.TestCase):
 		self.assertTrue(application.question_add("CASA").islower())
 	#Function 2
 	def test_select_option(self):
-		self.assertEqual(application.select_option("product"),True)
-		self.assertEqual(application.select_option(0),False)
+		self.assertTrue(application.select_option('5') == False)
+		self.assertTrue(application.select_option("hola") == True)
 	#Function 3
 	def test_the_product(self):
 		self.assertTrue(application.the_product("producto").isalpha())
