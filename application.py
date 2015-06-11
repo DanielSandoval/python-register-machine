@@ -40,7 +40,6 @@ def select_option(product):
         else:
             return False
     except ValueError:
-        #return False
         pass
 
 #Function 3: test_the_product
