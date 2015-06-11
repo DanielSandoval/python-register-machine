@@ -34,13 +34,10 @@ def question_add(add = ""):
 
 #Function 2: test_select_option
 def select_option(product):
-    try:
-        if product.isalpha() == True:
-            return True
-        else:
-            return False
-    except ValueError:
-        pass
+    if product.isalpha() == True:
+        return True
+    else:
+        return False
 
 #Function 3: test_the_product
 def the_product(product = ""):
