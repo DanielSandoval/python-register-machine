@@ -43,17 +43,6 @@ def select_option(product):
         #return False
         pass
 
-    '''if type(product) == int:
-        if (0 in product) or (1 in product) or (2 in product) or (3 in product) or (4 in product) or (5 in product) or (6 in product) or (7 in product) or (8 in product) or (9 in product):
-            return False
-        else:
-            return True
-    else:
-        if ("0" in product) or ("1" in product) or ("2" in product) or ("3" in product) or ("4" in product) or ("5" in product) or ("6" in product) or ("7" in product) or ("8" in product) or ("9" in product):
-            return False
-        else:
-            return True'''
-
 #Function 3: test_the_product
 def the_product(product = ""):
     if __name__ == '__main__':
